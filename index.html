@@ -15,22 +15,22 @@
   	</div>
 </div>-->
 <br /><br />
-<div id="content">
-</div>
-<div class="dropdown">
+<h3>Current Hiking Conditions</h3>
+<p>NCSCO</p>
+<!--<div class="dropdown">
   	<button onclick="myFunction(5)" class="dropbtn">Radar Products</button>
   	<div id="5" class="dropdown-content">
     	<a onclick="radarOn()">Radar On</a>
     	<a onclick="radarOff()">Radar Off</a>
   	</div>
-</div>
+</div>-->
 <div id="map" class="map"></div>
 <div class="overlay-container">
 	<span class="overlay-text" id="feature-name"></span><br />
 </div>
 
 </div>
-<table width="50%" align="center" style="margin-top:1%">
+<table width="60%" align="center" style="margin-top:1%">
   <tbody>
     <tr>
       <td>
@@ -53,6 +53,15 @@
         <img src="Red Key.png" style="width:40px;"/>
         <p>Poor Hiking Conditions</p>
       </td>
+			<td>
+				<div>
+					<input type="radio" name="radarToggle" id="radarToggleOn" onclick="radarOn()">
+					<label for="radarToggleOn">On</label>
+					<input type="radio" name="radarToggle" id="radarToggleOff" onclick="radarOff()">
+					<label for="radarToggleOff">Off</label>
+				</div>
+				<p>Toggle Current Radar</p>
+			</td>
     </tr>
   </tbody>
 </table>
