@@ -1,0 +1,174 @@
+body{
+	text-align: center;
+	font-family: 'Calibri';
+	background-color: #575757;
+	color: white;
+}
+a{
+	color: white;
+}
+#shortTermCond{
+	width: 45%;
+}
+#econetFrame{
+	width: 100%;
+	height: 425px;
+}
+.icon {
+	width: 20px;
+}
+.park {
+	width: 70px;
+}
+.map {
+	width: 70%;
+	height: 440px;
+	margin-left: auto;
+	margin-right: auto;
+	display: block;
+}
+
+
+.labelbtn {
+  background-color: #3498DB;
+  color: white;
+  padding: 6px;
+  font-size: 16px;
+  border: none;
+  cursor: pointer;
+  margin-left: 5px;
+}
+
+.labelbtn:hover {
+	background-color: #2980B9;
+}
+
+.dropbtn {
+  background-color: #3498DB;
+  color: white;
+  padding: 16px;
+  font-size: 16px;
+  border: none;
+  cursor: pointer;
+}
+
+.dropbtn:hover, .dropbtn:focus {
+  background-color: #2980B9;
+}
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f1f1f1;
+  min-width: 160px;
+  overflow: auto;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+}
+
+.dropdown-content a {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+}
+
+.dropdown a:hover {background-color: #ddd;}
+
+.show {display: block;}
+
+#info {
+  position: absolute;
+  height: 1px;
+  width: 1px;
+  z-index: 100;
+}
+
+.tooltip.in {
+  opacity: 1;
+  filter: alpha(opacity=100);
+}
+
+.tooltip.top .tooltip-arrow {
+  border-top-color: white;
+}
+
+.tooltip-inner {
+  border: 2px solid white;
+}
+.dragDiv {
+  position: absolute;
+  z-index: 9;
+  text-align: center;
+  cursor: move;
+  color: white;
+  font-family: 'Calibri';
+  text-shadow: 2px 2px #bfbfbf;
+  font-weight: bold;
+}
+
+.dragDivHeader {
+  padding: 10px;
+  cursor: move;
+  z-index: 10;
+  color: #fff;
+}
+.help {
+	position: absolute;
+	margin-left: 10px;
+	padding: 0px 5px;
+}
+.help:hover {
+	border: 0.3px solid black;
+	cursor: pointer;
+}
+.trouble {
+	width: 70%;
+	margin-left: auto;
+	margin-right: auto;
+	display: block;
+}
+.troubleList {
+	width: 30%;
+	text-align: left;
+	margin-left: auto;
+	margin-right: auto;
+	display: block;
+}
+.underline {
+	text-decoration: underline;
+}
+
+/* Feature Overlay */
+
+.overlay-container{
+	font-family: Verdana,Geneva,sans-serif; ;
+	background-color: rgba(85, 85, 85, 0.8);
+	width: 150px;
+	color: white;
+	text-align: center;
+	border-radius: 10px;
+	padding: 2px 0;
+	position: absolute;
+	z-index: 1;
+	bottom: 100%;
+	left: 50%;
+	margin-left: -75px;
+	margin-bottom: 10px;
+}
+
+.overlay-container #feature-name:after{
+	content: '';
+	position: absolute;
+	top: 100%;
+	left: 50%;
+	margin-left: -10px;
+	border-width: 10px;
+	border-style: solid;
+	border-color: rgba(85, 85, 85, 0.8) transparent transparent transparent;
+}
