@@ -5,75 +5,85 @@
 <link rel="stylesheet" href="stylesheet.css"/>
 <script src="https://cdn.jsdelivr.net/gh/openlayers/openlayers.github.io@master/en/v6.5.0/build/ol.js"></script>
 </head>
+<!--<header>
+	<div class="headerDiv">
+		<img src="ncsu_logo.png" align="left" width="15%">
+		<p style="font-size:200%;">North Carolina Hiking Weather Map</p>
+	</div>
+</header>-->
 <body>
-<!--<div class="dropdown">
-  	<button onclick="myFunction(1)" class="dropbtn">Map Options</button>
-  	<div id="1" class="dropdown-content">
-  		<a onclick="allCountiesOn()">US Counties On</a>
-    	<a onclick="allCountiesOn()">U.S. Counties On</a>
 
-  	</div>
-</div>-->
-<br /><br />
-<h3>Current Hiking Conditions</h3>
-<p>NCSCO</p>
-<!--<div class="dropdown">
-  	<button onclick="myFunction(5)" class="dropbtn">Radar Products</button>
-  	<div id="5" class="dropdown-content">
-    	<a onclick="radarOn()">Radar On</a>
-    	<a onclick="radarOff()">Radar Off</a>
-  	</div>
-</div>-->
-<div id="map" class="map"></div>
-<div class="overlay-container">
-	<span class="overlay-text" id="feature-name"></span><br />
+<div class="greyOut">
+	<div class="headerDiv">
+		<a href="https://www.ncsu.edu/">
+			<img src="ncsu_logo.png" align="left" width="15%" style="padding-top:28px;">
+		</a>
+		<a href="https://www.ncsu.edu/">
+			<img src="ncsco_logo.png" align="right" width="10%" style="padding-top:17px;">
+		</a>
+		<p style="font-size:200%;margin:0px;padding-top:28px;">North Carolina Hiking Weather Map</p>
+	</div>
 </div>
 
+<div id="mainDiv">
+	<div class="dropdown">
+	  	<button onclick="myFunction(4)" class="dropbtn">More Hiking Resources</button>
+			<div id="4" class="dropdown-content">
+				<a href="https://www.ncparks.gov/find-an-activity/trails" target="_blank">Find a Trail</a>
+				<a href="https://xapps.ncdenr.org/aq/ForecastCenterEnvista" target="_blank">Air Quality</a>
+				<a href="https://www.fs.usda.gov/activity/nfsnc/recreation/hiking" target="_blank">National Forests</a>
+				<a href="https://www.nps.gov/blri/index.htm">Blue Ridge Pkwy</a>
+			</div>
+	</div>
+	<div id="map" class="map"></div>
+	<div class="overlay-container">
+		<span class="overlay-text" id="feature-name"></span><br />
+	</div>
+	<table width="60%" align="center" style="margin-top:1%">
+	  <tbody>
+	    <tr>
+	      <td>
+	        <img src="Green Marker.png" style="width:40px;"/>
+	        <p>NC State Park</p>
+	      </td>
+	      <td>
+	        <img src="Blue Marker.png" style="width:40px;"/>
+	        <p>Federal/National Park</p>
+	      </td>
+	      <td>
+	        <img src="Green Key.png" style="width:40px;"/>
+	        <p>Favorable Hiking Conditions</p>
+	      </td>
+	      <td>
+	        <img src="Yellow Key.png" style="width:40px;"/>
+	        <p>Marginal Hiking Conditions</p>
+	      </td>
+	      <td>
+	        <img src="Red Key.png" style="width:40px;"/>
+	        <p>Poor Hiking Conditions</p>
+	      </td>
+				<!--<td>
+					<div>
+						<input type="radio" name="radarToggle" id="radarToggleOn" onclick="radarOn()">
+						<label for="radarToggleOn">On</label>
+						<input type="radio" name="radarToggle" id="radarToggleOff" onclick="radarOff()">
+						<label for="radarToggleOff">Off</label>
+					</div>
+					<p>Toggle Current Radar</p>
+				</td>-->
+	    </tr>
+	  </tbody>
+	</table>
 </div>
-<table width="60%" align="center" style="margin-top:1%">
-  <tbody>
-    <tr>
-      <td>
-        <img src="Green Marker.png" style="width:40px;"/>
-        <p>NC State Park</p>
-      </td>
-      <td>
-        <img src="Blue Marker.png" style="width:40px;"/>
-        <p>Federal/National Park</p>
-      </td>
-      <td>
-        <img src="Green Key.png" style="width:40px;"/>
-        <p>Favorable Hiking Conditions</p>
-      </td>
-      <td>
-        <img src="Yellow Key.png" style="width:40px;"/>
-        <p>Marginal Hiking Conditions</p>
-      </td>
-      <td>
-        <img src="Red Key.png" style="width:40px;"/>
-        <p>Poor Hiking Conditions</p>
-      </td>
-			<td>
-				<div>
-					<input type="radio" name="radarToggle" id="radarToggleOn" onclick="radarOn()">
-					<label for="radarToggleOn">On</label>
-					<input type="radio" name="radarToggle" id="radarToggleOff" onclick="radarOff()">
-					<label for="radarToggleOff">Off</label>
-				</div>
-				<p>Toggle Current Radar</p>
-			</td>
-    </tr>
-  </tbody>
-</table>
+
 
 <br><br>
 <table>
 	<tbody>
 		<tr>
 			<td style="width:45%;padding:2%;">
-				<h1>State Park Weather Condtions</h1>
 				<form>
-					<label for="parks">Choose a State Park</label>
+					<label for="parks">Choose a Park</label>
 					<select name="parks" id="parks" onchange="collectConditions()">
 						<option value="Carolina Beach State Park">Carolina Beach State Park</option>
 						<option value="Carvers Creek State Park">Carvers Creek State Park</option>
@@ -133,80 +143,21 @@
 	</tbody>
 </table>
 <br/><br />
-<!--<table align="center">
-  <tbody>
-    <tr>
-      <td class="park"><p>Carolina Beach State Park</p></td>
-      <td class="icon"><img src="Stop.png" id="CBSP"></td>
-    </tr>
-    <tr>
-      <td class="park"><p>Carvers Creek State Park</p></td>
-      <td class="icon"><img src="Caution.png" id="CCSP"></td>
-    </tr>
-    <tr>
-      <td class="park"><p>Chimney Rock State Park</p></td>
-      <td class="icon"><img src="Stop.png" id="CRSP"></td>
-    </tr>
-    <tr>
-      <td class="park"><p>Cliffs of the Neuse State Park</p></td>
-      <td class="icon"><img src="Stop.png" id="CNSP"></td>
-    </tr>
-    <tr>
-      <td class="park"><p>Crowders Mountain State Park</p></td>
-      <td class="icon"><img src="Stop.png" id="CMSP"></td>
-    </tr>
-    <tr>
-      <td class="park"><p>Dismal Swamp State Park</p></td>
-      <td class="icon"><img src="Stop.png" id="DSSP"></td>
-    </tr>
-    <tr>
-      <td class="park"><p>Elk Knob State Park</p></td>
-      <td class="icon"><img src="Stop.png" id="EKSP"></td>
-    </tr>
-    <tr>
-      <td class="park"><p>Eno River State Park</p></td>
-      <td class="icon"><img src="Stop.png" id="ERSP"></td>
-    </tr>
-    <tr>
-      <td class="park"><p>Falls Lake State Recreation Area</p></td>
-      <td class="icon"><img src="Stop.png" id="FLSRA"></td>
-    </tr>
-    <tr>
-      <td class="park"><p>Fort Fisher State Recreation Area</p></td>
-      <td class="icon"><img src="Stop.png" id="FFSRA"></td>
-    </tr>
-    <tr>
-      <td class="park"><p>Fort Macon State Park</p></td>
-      <td class="icon"><img src="Stop.png" id="FMSP"></td>
-    </tr>
-    <tr>
-      <td class="park"><p>Goose Creek State Park</p></td>
-      <td class="icon"><img src="Stop.png" id="GCSP"></td>
-    </tr>
-    <tr>
-      <td class="park"><p>Gorges State Park</p></td>
-      <td class="icon"><img src="Stop.png" id="GSP"></td>
-    </tr>
-    <tr>
-      <td class="park"><p>Grandfather Mountain State Park</p></td>
-      <td class="icon"><img src="Stop.png" id="GMSP"></td>
-    </tr>
-    <tr>
-      <td class="park"><p>Hammocks Beach State Park</p></td>
-      <td class="icon"><img src="Stop.png" id="HBSP"></td>
-    </tr>
-    <tr>
-      <td class="park"><p>Hanging Rock State Park</p></td>
-      <td class="icon"><img src="Stop.png" id="HRSP"></td>
-    </tr>
-    <tr>
-      <td class="park"><p>Haw River State Park</p></td>
-      <td class="icon"><img src="Stop.png" id="HRSP"></td>
-    </tr>
-  </tbody>-->
-</table>
 
-<br /><br /><br /><br />
+<div class="blueOut">
+	<div class="footerDiv">
+		<img src="aasc_logo.png" align="right" style="padding-top:50px;">
+		<div style="width:35%;text-align:left;padding-top: 20px;" align="left">
+			<p style="font-size:150%;padding-top:1%;margin:0px;">North Carolina</p>
+			<p style="font-size:150%;padding-top:1%;margin:0px;">State Climate Office</p>
+			<p style="font-size:80%;padding-top:3%;margin:0px;">Research III Building, Suite 130</p>
+			<p style="font-size:80%;padding-top:1%;margin:0px;">1005 Capability Drive</p>
+			<p style="font-size:80%;padding-top:1%;margin:0px;">Centennial Campus Box 7236</p>
+			<p style="font-size:80%;padding-top:1%;margin:0px;">NC State University</p>
+		</div>
+
+	</div>
+</div>
 <script src="./parkInfo.js" type="text/javascript"></script>
 <script src="./layerStyle.js" type="text/javascript"></script>
 <script src="./main.js" type="text/javascript"></script>

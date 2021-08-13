@@ -10,14 +10,19 @@ let extent = ol.proj.transformExtent(
 
 // Build main map
 const map = new ol.Map({
+  title: {
+    text: 'Test'
+  },
 	target: 'map',
-	controls: ol.control.defaults({
-		attributionOptions: /** @type {olx.control.AttributionOptions} */ ({
-      		collapsible: false
-    	})
-  	}).extend([
-    	scaleLineControl,
-  	]),
+  controls: [],
+  interactions: [],
+	//controls: ol.control.defaults({
+		//attributionOptions: /** @type {olx.control.AttributionOptions} */ ({
+      		//collapsible: false
+    	//})
+  	//}).extend([
+    	//scaleLineControl,
+  	//]),
 	layers: [
 	  	Counties = new ol.layer.Vector({
 	  		title: 'North Carolina',
@@ -35,6 +40,23 @@ const map = new ol.Map({
 	  		}),
 	  		zIndex: 0
 	  	}),
+      Roads = new ol.layer.Vector({
+        title: 'Primary Roads',
+        source: new ol.source.Vector({
+          url: 'https://raw.githubusercontent.com/EFisher828/Hiking-GeoJSONs/main/Primary%20Roads.geojson',
+          format: new ol.format.GeoJSON()
+        }),
+        style: new ol.style.Style({
+          fill: new ol.style.Fill({
+            color: '#333333'
+          }),
+          stroke: new ol.style.Stroke({
+            color: '#333333',
+            width: 0.2
+          })
+        }),
+        zIndex: 2
+      })
 			],
 	view: new ol.View({
 		center: ol.proj.fromLonLat([-79.9000115996899,34.36925391733207]),
@@ -44,9 +66,9 @@ const map = new ol.Map({
 	})
 });
 
-map.on('postcompose',function(e){
-    document.querySelector('canvas').style.backgroundImage="linear-gradient(to bottom right, #4156A1 , #C3E6F5)";//#4156A1 , #C3E6F5
-});
+//map.on('postcompose',function(e){
+    //document.querySelector('canvas').style.backgroundImage="linear-gradient(to bottom right, #4156A1 , #C3E6F5)";//#4156A1 , #C3E6F5
+//});
 
 locationsSource = new ol.source.Vector({
   url: 'https://raw.githubusercontent.com/EFisher828/Hiking-GeoJSONs/main/NC%20Parks.geojson',
@@ -72,10 +94,10 @@ const stateAndFederalLocations = () => {
 
 	map.on('click', function(e){
 		map.forEachFeatureAtPixel(e.pixel, function(feature,layer){
-      console.log()
+      console.log(feature)
 			overlayLayer.setPosition(undefined)
 			let clickedCoordinate = e.coordinate;
-			let clickedFeatureName = `<a href="${feature.values_.URL}" target="_blank">${feature.values_.Park}</a>`;
+			let clickedFeatureName = `<em>${feature.values_.Park}</em><br/><br/><a href="${feature.values_.URL}" target="_blank" class="mapParks">Park Info</a><br/><a href="https://forecast.weather.gov/MapClick.php?lat=${feature.values_.Latitude}&lon=${feature.values_.Longitude}" target="_blank" class="mapParks">7-Day Forecast</a>`;
 			overlayLayer.setPosition(clickedCoordinate)
 			overlayFeatureName.innerHTML = clickedFeatureName;
 
@@ -96,7 +118,7 @@ let objLength;
 let mountainList = []
 let piedmontList = []
 let coastalList = []
-for(let k=0;k<5;k++){
+for(let k=0;k<10;k++){
   for(let x=0;x<3;x++){
     f = 0
     m = 0
@@ -166,7 +188,7 @@ for(let k=0;k<5;k++){
     					//renderResponse(parkName,result,latitude,longitude,precipWork,icon,isDaytime,temperature,map)
     					//areaAveragedResponse(mountainList,)
               f = f + 1
-              if(x==2){
+              if(k==9){
                 if(mountainList.length>7 && piedmontList.length>10 && coastalList.length>15){
                   areaAveragedResponse(mountainList,piedmontList,coastalList,m)
                   m = m + 1
@@ -183,4 +205,20 @@ for(let k=0;k<5;k++){
   		}
   	}
   }
+}
+
+//Slideshow code courtesy of W3 Schools
+let myIndex = 0;
+carousel();
+
+function carousel() {
+  let i;
+  let x = document.getElementsByClassName("mySlides");
+  for (i = 0; i < x.length; i++) {
+    x[i].style.display = "none";
+  }
+  myIndex++;
+  if (myIndex > x.length) {myIndex = 1}
+  x[myIndex-1].style.display = "block";
+  setTimeout(carousel, 2000); // Change image every 2 seconds
 }

@@ -20,7 +20,8 @@ const addColoredRegions = (mountainColor,piedmontColor,coastalColor) => {
     			color: mountainColor
     		}),
     		stroke: new ol.style.Stroke({
-    			color: '#828282'
+    			color: '#333333',
+          width: 0.5
     		})
     	}),
     	zIndex: 1,
@@ -39,7 +40,8 @@ const addColoredRegions = (mountainColor,piedmontColor,coastalColor) => {
     			color: piedmontColor
     		}),
     		stroke: new ol.style.Stroke({
-    			color: '#828282'
+    			color: '#333333',
+          width: 0.5
     		})
     	}),
     	zIndex: 1,
@@ -58,7 +60,8 @@ const addColoredRegions = (mountainColor,piedmontColor,coastalColor) => {
     			color: coastalColor
     		}),
     		stroke: new ol.style.Stroke({
-    			color: '#828282'
+    			color: '#333333',
+          width: 0.5
     		})
     	}),
     	zIndex: 1,
@@ -79,7 +82,7 @@ const mountainRegion = () => {
 	  			color: '#dbdbdb'
 	  		}),
 	  		stroke: new ol.style.Stroke({
-	  			color: '#a6a6a6'
+	  			color: '#333333'
 	  		})
 	  	}),
 	  	zIndex: 1,
