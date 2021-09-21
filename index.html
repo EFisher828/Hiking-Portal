@@ -21,7 +21,7 @@
 		<a href="https://www.ncsu.edu/">
 			<img src="ncsco_logo.png" align="right" width="10%" style="padding-top:17px;">
 		</a>
-		<p style="font-size:200%;margin:0px;padding-top:28px;">North Carolina Hiking Weather Map</p>
+		<p style="font-size:200%;margin:0px;padding-top:28px;">North Carolina Hiking Conditions Map</p>
 	</div>
 </div>
 
@@ -29,17 +29,34 @@
 	<div class="dropdown">
 	  	<button onclick="myFunction(4)" class="dropbtn">More Hiking Resources</button>
 			<div id="4" class="dropdown-content">
-				<a href="https://www.ncparks.gov/find-an-activity/trails" target="_blank">Find a Trail</a>
 				<a href="https://xapps.ncdenr.org/aq/ForecastCenterEnvista" target="_blank">Air Quality</a>
-				<a href="https://www.fs.usda.gov/activity/nfsnc/recreation/hiking" target="_blank">National Forests</a>
+				<a href="https://www.nps.gov/appa/index.htm">Appalachian Tr</a>
 				<a href="https://www.nps.gov/blri/index.htm">Blue Ridge Pkwy</a>
+				<a href="https://www.ncparks.gov/find-an-activity/trails" target="_blank">Find a Trail</a>
+				<a href="https://www.fs.usda.gov/activity/nfsnc/recreation/hiking" target="_blank">National Forests</a>
 			</div>
 	</div>
 	<div id="map" class="map"></div>
 	<div class="overlay-container">
 		<span class="overlay-text" id="feature-name"></span><br />
 	</div>
-	<table width="60%" align="center" style="margin-top:1%">
+	<form class="" action="index.html" method="post" onchange="radioAPICall()">
+		<input type="radio" name="DayForm" value="" id="D0" checked="checked">
+		<label for="DayForm" id="D0Label"></label>
+		<input type="radio" name="DayForm" value="" id="D1">
+		<label for="DayForm" id="D1Label"></label>
+		<input type="radio" name="DayForm" value="" id="D2">
+		<label for="DayForm" id="D2Label"></label>
+		<input type="radio" name="DayForm" value="" id="D3">
+		<label for="DayForm" id="D3Label"></label>
+		<input type="radio" name="DayForm" value="" id="D4">
+		<label for="DayForm" id="D4Label"></label>
+		<input type="radio" name="DayForm" value="" id="D5">
+		<label for="DayForm" id="D5Label"></label>
+		<input type="radio" name="DayForm" value="" id="D6">
+		<label for="DayForm" id="D6Label"></label>
+	</form>
+	<table width="60%" align="center" style="margin-top:1%;color:#333333;">
 	  <tbody>
 	    <tr>
 	      <td>
@@ -62,20 +79,14 @@
 	        <img src="Red Key.png" style="width:40px;"/>
 	        <p>Poor Hiking Conditions</p>
 	      </td>
-				<!--<td>
-					<div>
-						<input type="radio" name="radarToggle" id="radarToggleOn" onclick="radarOn()">
-						<label for="radarToggleOn">On</label>
-						<input type="radio" name="radarToggle" id="radarToggleOff" onclick="radarOff()">
-						<label for="radarToggleOff">Off</label>
-					</div>
-					<p>Toggle Current Radar</p>
-				</td>-->
 	    </tr>
 	  </tbody>
 	</table>
 </div>
 
+<div class="infoDiv">
+	<p>The above map shows current area-averaged hiking conditions across North Carolina. These conditions are derived from the day one NWS forecast for each state and federal park in the mountain, piedmont, and coastal regions. For an extended forecast, please consult the tools below.</p>
+</div>
 
 <br><br>
 <table>
@@ -151,9 +162,9 @@
 			<p style="font-size:150%;padding-top:1%;margin:0px;">North Carolina</p>
 			<p style="font-size:150%;padding-top:1%;margin:0px;">State Climate Office</p>
 			<p style="font-size:80%;padding-top:3%;margin:0px;">Research III Building, Suite 130</p>
-			<p style="font-size:80%;padding-top:1%;margin:0px;">1005 Capability Drive</p>
-			<p style="font-size:80%;padding-top:1%;margin:0px;">Centennial Campus Box 7236</p>
-			<p style="font-size:80%;padding-top:1%;margin:0px;">NC State University</p>
+			<p style="font-size:80%;padding-top:2%;margin:0px;">1005 Capability Drive</p>
+			<p style="font-size:80%;padding-top:2%;margin:0px;">Centennial Campus Box 7236</p>
+			<p style="font-size:80%;padding-top:2%;margin:0px;">NC State University</p>
 		</div>
 
 	</div>

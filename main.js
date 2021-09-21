@@ -207,18 +207,151 @@ for(let k=0;k<10;k++){
   }
 }
 
-//Slideshow code courtesy of W3 Schools
-let myIndex = 0;
-carousel();
-
-function carousel() {
-  let i;
-  let x = document.getElementsByClassName("mySlides");
-  for (i = 0; i < x.length; i++) {
-    x[i].style.display = "none";
+const radioAPICall = () => {
+  map.removeLayer(Mountains)
+  map.removeLayer(Piedmont)
+  map.removeLayer(coastalPlain)
+  let radios = document.getElementsByName('DayForm');
+  let dayNum
+  for(let u=0;u<radios.length;u++) {
+    if (radios[u].checked) {
+      // do whatever you want with the checked radio
+      dayNum = radios[u].value
+      // only one radio can be logically checked, don't check the rest
+      break;
+    }
   }
-  myIndex++;
-  if (myIndex > x.length) {myIndex = 1}
-  x[myIndex-1].style.display = "block";
-  setTimeout(carousel, 2000); // Change image every 2 seconds
+  console.log(dayNum)
+  let reqLocations;
+  let f;
+  let m;
+  let objLength;
+  let mountainList = []
+  let piedmontList = []
+  let coastalList = []
+  for(let k=0;k<10;k++){
+    for(let x=0;x<3;x++){
+      f = 0
+      m = 0
+    	if(x==0){
+    		reqLocations = mountainParks
+    	}else if(x==1){
+    		reqLocations = piedmontParks
+    	}else{
+    		reqLocations = coastalParks
+    	}
+    	for(let i=0;i<1;i++){
+    		console.log('Beep boop');
+    		for(let key in reqLocations) {
+          objLength = Object.keys(reqLocations).length
+          try{
+      			let latitude = reqLocations[key].lat
+      			let longitude = reqLocations[key].lon
+      			let parkName = key
+      			const url = `https://api.weather.gov/gridpoints/${reqLocations[key].CWA}/${reqLocations[key].gridX},${reqLocations[key].gridY}/forecast`
+      			let field = reqLocations[key].field
+      			//console.log(url)
+
+      			const xhr = new XMLHttpRequest();
+
+
+      			xhr.responseType = 'json';
+
+      			xhr.onreadystatechange = function() {
+      				if(xhr.readyState === XMLHttpRequest.DONE){
+                if(xhr.status === 500){
+                  //console.log('bleep')
+                }else if(xhr.status === 200){
+                  //console.log('Ok')
+                }
+      					let name = xhr.response.properties.periods[dayNum].name;
+      					let precipWork = xhr.response.properties.periods[dayNum].shortForecast;
+      					let temperature = xhr.response.properties.periods[dayNum].temperature;
+      					let temp = xhr.response.properties.periods[dayNum].temperature;
+      					let icon = xhr.response.properties.periods[dayNum].icon;
+      					let isDaytime = xhr.response.properties.periods[dayNum].isDaytime;
+
+
+      					let precipSplit = precipWork.split(' ');
+      					//console.log(precipSplit)
+      					for(i = 0; i < precipSplit.length; i++){
+      						word = precipSplit[i]
+      						if(word === 'Rain' || word === 'Snow' || word === 'Thunderstorms' || word === 'Drizzle'){
+      							result = 3//'Stay Home!'
+      							break
+      						} else if (word === 'Slight' || word === 'Chance' ||  word === 'Fog' || word === 'Isolated' || word === 'Patchy' || word === 'Areas' || word === 'Haze'){
+      							result = 2//'Use Caution!'
+      							break
+      						} else if (precipWork === 'Cloudy'){
+      							result = 2//'Use Caution!'
+      						} else {
+      							result = 1//'Hike On!'
+      						}
+      					}
+
+      					if(x==0){
+      						mountainList.push(result)
+      					}else if(x==1){
+      						piedmontList.push(result)
+      					}else{
+      						coastalList.push(result)
+      					}
+      					//renderResponse(parkName,result,latitude,longitude,precipWork,icon,isDaytime,temperature,map)
+      					//areaAveragedResponse(mountainList,)
+                f = f + 1
+                if(k==9){
+                  if(mountainList.length>7 && piedmontList.length>10 && coastalList.length>15){
+                    areaAveragedResponse(mountainList,piedmontList,coastalList,m)
+                    m = m + 1
+                  }
+                }
+      				}
+      			}
+
+      			xhr.open("GET",url)
+      			xhr.send()
+          }catch{
+            console.log('failwhale')
+          }
+    		}
+    	}
+    }
+  }
+}
+
+//For day dayList
+const dayFull = (number) => {
+  if(number==0){
+    return "Sunday"
+  }else if(number==1){
+    return "Monday"
+  }else if(number==2){
+    return "Tuesday"
+  }else if(number==3){
+    return "Wednesday"
+  }else if(number==4){
+    return "Thursday"
+  }else if(number==5){
+    return "Friday"
+  }else if(number==6){
+    return "Saturday"
+  }
+}
+
+let d = new Date();
+let today = d.getDay();
+let dayIt;
+
+document.getElementById('D0').value = today
+document.getElementById('D0Label').innerHTML = dayFull(today)
+
+for(let days=1;days<7;days++){
+  today = today + 1
+  if(today==7){
+    today = 0
+  }
+
+  document.getElementById(`D${days}`).value = today
+  document.getElementById(`D${days}Label`).innerHTML = dayFull(today)
+
 }

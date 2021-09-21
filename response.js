@@ -17,6 +17,7 @@ const colorDecider = (value) => {
 const areaAveragedResponse = (mountainList,piedmontList,coastalList,m) => {
 	if(m==0){
 		let mtnSum = 0
+		console.log(mountainList)
 		for(let i=0;i<mountainList.length;i++){
 			mtnSum += parseInt( mountainList[i], 10 );
 		}
